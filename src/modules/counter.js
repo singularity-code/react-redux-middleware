@@ -1,4 +1,7 @@
-import { createAction, handleActions } from "redux-actions";
+import {
+  createAction,
+  handleActions
+} from "redux-actions";
 
 const INCREASE = "counter/INCREASE";
 const DECREASE = "counter/DECREASE";
@@ -6,10 +9,22 @@ const DECREASE = "counter/DECREASE";
 export const increase = createAction(INCREASE);
 export const decrease = createAction(DECREASE);
 
+// async test
+export const increaseAsync = () => dispatch => {
+  setTimeout(() => {
+    dispatch(increase());
+  }, 1000);
+}
+
+export const decreaseAsync = () => dispatch => {
+  setTimeout(() => {
+    dispatch(decrease());
+  }, 1000);
+}
+
 const initialState = 0;
 
-const counter = handleActions(
-  {
+const counter = handleActions({
     [INCREASE]: (state) => state + 1,
     [DECREASE]: (state) => state - 1,
   },
