@@ -6,8 +6,16 @@ import { getPost, getUsers } from '../modules/sample';
 const { useEffect } = React;
 const SampleContainer = ({ getPost, getUsers, post, users, loadingPost, loadingUsers }) => {
   useEffect(() => {
-    getPost(1);
-    getUsers(1);
+    // useEffect can not pass async, handle error inside
+    const fn = async () => {
+      try {
+        await getPost(1);
+        await getUsers(1);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fn();
   }, [getPost, getUsers]);
   return <Sample post={post} users={users} loadingPost={loadingPost} loadingUsers={loadingUsers} />;
 };
